@@ -3,7 +3,7 @@
 ## Simple endpoint
 
 ```
-$ ab -n 1000 -c 100 http://localhost:3000/
+ab -n 1000 -c 100 http://localhost:3000/
 This is ApacheBench, Version 2.3 <$Revision: 1901567 $>
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
@@ -116,4 +116,63 @@ Percentage of the requests served within a certain time (ms)
   98%   1026
   99%   1028
  100%   1029 (longest request)
+ ```
+
+## Database access endpoint (simple and many queries, for example, N+1 problem)
+
+```
+ab -n 1000 -c 100 http://localhost:3000/database
+This is ApacheBench, Version 2.3 <$Revision: 1901567 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:
+Server Hostname:        localhost
+Server Port:            3000
+
+Document Path:          /database
+Document Length:        30 bytes
+
+Concurrency Level:      100
+Time taken for tests:   2.747 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      230000 bytes
+HTML transferred:       30000 bytes
+Requests per second:    364.00 [#/sec] (mean)
+Time per request:       274.726 [ms] (mean)
+Time per request:       2.747 [ms] (mean, across all concurrent requests)
+Transfer rate:          81.76 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   1.0      0       5
+Processing:    27  263  60.9    239     435
+Waiting:       23  261  60.8    238     434
+Total:         28  263  60.8    239     439
+
+Percentage of the requests served within a certain time (ms)
+  50%    239
+  66%    271
+  75%    304
+  80%    321
+  90%    360
+  95%    374
+  98%    389
+  99%    412
+ 100%    439 (longest request)
  ```
